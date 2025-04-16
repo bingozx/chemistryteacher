@@ -18,6 +18,7 @@
     "dev:worker": "wrangler dev"
   },
   "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.0",
     "@worstone/vue-aplayer": "^1.0.6",
     "aplayer": "^1.10.1",
     "axios": "^1.6.8",
@@ -29,7 +30,7 @@
     "pinia-plugin-persistedstate": "^3.2.1",
     "swiper": "^11.1.1",
     "vue": "^3.4.24",
-    "@cloudflare/kv-asset-handler": "^0.3.0"
+    "vue-router": "4"
   },
   "devDependencies": {
     "@icon-park/vue-next": "^1.4.2",
