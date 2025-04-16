@@ -58,8 +58,7 @@ export default ({ mode }) =>
             }
           ],
           // 离线页面
-          offlineGoogleAnalytics: true,
-          offlinePage: '/offline.html'
+          offlineGoogleAnalytics: true
         },
         manifest: {
           name: loadEnv(mode, process.cwd()).VITE_SITE_NAME,

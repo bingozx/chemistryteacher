@@ -1,7 +1,7 @@
 <template>
   <div class="courses-view">
     <div class="header">
-      <h1>化学课件</h1>
+      <h1>ChemTeacher白的化学课件</h1>
       <p class="subtitle">人教版初中化学精品课件</p>
     </div>
     
@@ -11,15 +11,15 @@
       <h2>获取完整课件</h2>
       <div class="contact-methods">
         <div class="contact-card">
-          <img src="/images/icon/xiaohongshu.png" alt="小红书" />
+          <img :src="xiaohongshuIcon" alt="小红书" />
           <p>小红书号：ZXX711618</p>
         </div>
         <div class="contact-card">
-          <img src="/images/icon/douyin.png" alt="抖音" />
+          <img :src="douyinIcon" alt="抖音" />
           <p>抖音号：ZXX711618</p>
         </div>
         <div class="contact-card">
-          <img src="/images/icon/wechat.png" alt="微信" />
+          <img :src="wechatIcon" alt="微信" />
           <p>扫码添加微信</p>
         </div>
       </div>
@@ -29,6 +29,9 @@
 
 <script setup>
 import CoursePreview from '@/components/CoursePreview/index.vue'
+import xiaohongshuIcon from '@/assets/images/icon/xiaohongshu.png'
+import douyinIcon from '@/assets/images/icon/douyin.png'
+import wechatIcon from '@/assets/images/icon/wechat.png'
 </script>
 
 <style lang="scss" scoped>

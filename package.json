@@ -1,8 +1,6 @@
 {
   "name": "chemistryteacher",
   "author": "ChemTeacher白",
-  "github": "https://github.com/imsyy/home",
-  "home": "https://imsyy.top",
   "private": true,
   "version": "1.0.0",
   "type": "module",
