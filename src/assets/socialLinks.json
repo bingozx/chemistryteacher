@@ -34,5 +34,24 @@
     "icon": "/images/icon/telegram.png",
     "tip": "你懂的 ~",
     "url": "https://t.me/bottom_user"
+  },
+  {
+    "name": "小红书",
+    "icon": "/images/icon/xiaohongshu.png",
+    "tip": "关注我的小红书号：ZXX711618",
+    "url": "https://www.xiaohongshu.com/user/profile/5e30e606000000000100618e"
+  },
+  {
+    "name": "抖音",
+    "icon": "/images/icon/douyin.png",
+    "tip": "关注我的抖音号：ZXX711618",
+    "url": "https://v.douyin.com/ZXX711618"
+  },
+  {
+    "name": "微信",
+    "icon": "/images/icon/wechat.png",
+    "tip": "扫码添加我的微信",
+    "url": "#",
+    "qrcode": true
   }
 ]

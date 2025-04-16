@@ -22,6 +22,11 @@ export default ({ mode }) =>
       }),
       VitePWA({
         registerType: "autoUpdate",
+        devOptions: {
+          enabled: true,
+          type: 'module',
+          navigateFallback: 'index.html'
+        },
         workbox: {
           skipWaiting: true,
           clientsClaim: true,
@@ -40,7 +45,21 @@ export default ({ mode }) =>
                 cacheName: "image-cache",
               },
             },
+            {
+              urlPattern: /^https:\/\/api\..*/, // API 请求缓存
+              handler: 'NetworkFirst',
+              options: {
+                cacheName: 'api-cache',
+                networkTimeoutSeconds: 5,
+                cacheableResponse: {
+                  statuses: [0, 200]
+                }
+              }
+            }
           ],
+          // 离线页面
+          offlineGoogleAnalytics: true,
+          offlinePage: '/offline.html'
         },
         manifest: {
           name: loadEnv(mode, process.cwd()).VITE_SITE_NAME,
@@ -50,6 +69,8 @@ export default ({ mode }) =>
           start_url: "/",
           theme_color: "#424242",
           background_color: "#424242",
+          orientation: "portrait",
+          categories: ["education", "productivity"],
           icons: [
             {
               src: "/images/icon/48.png",
@@ -85,12 +106,37 @@ export default ({ mode }) =>
               src: "/images/icon/512.png",
               sizes: "512x512",
               type: "image/png",
+              purpose: "any maskable"
             },
           ],
+          screenshots: [
+            {
+              src: "/screenshots/home.png",
+              sizes: "1280x720",
+              type: "image/png",
+              label: "首页截图"
+            }
+          ],
+          shortcuts: [
+            {
+              name: "课件展示",
+              url: "/courseware",
+              icons: [
+                {
+                  src: "/images/icon/96.png",
+                  sizes: "96x96",
+                  type: "image/png"
+                }
+              ]
+            }
+          ],
+          related_applications: [],
+          prefer_related_applications: false
         },
       }),
       viteCompression(),
     ],
+    base: '/',
     server: {
       port: "3000",
       open: true,
@@ -106,9 +152,7 @@ export default ({ mode }) =>
     css: {
       preprocessorOptions: {
         scss: {
-          api: 'modern',
           additionalData: `@use "./src/style/global.scss" as *;`,
-          silenceDeprecations: ["legacy-js-api"],
         },
       },
     },
@@ -119,5 +163,15 @@ export default ({ mode }) =>
           pure_funcs: ["console.log"],
         },
       },
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'element-plus': ['element-plus'],
+            'vue-vendor': ['vue', 'vue-router', 'pinia'],
+          }
+        }
+      },
+      chunkSizeWarningLimit: 1500,
+      sourcemap: false
     },
   });

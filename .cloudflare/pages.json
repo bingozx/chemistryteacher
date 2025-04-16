@@ -1,0 +1,22 @@
+{
+  "buildConfig": {
+    "buildCommand": "pnpm install && pnpm run build",
+    "outputDirectory": "dist",
+    "rootDirectory": "/",
+    "nodeVersion": "18"
+  },
+  "deploymentConfigs": {
+    "production": {
+      "env": {
+        "VITE_SITE_NAME": "化学教学",
+        "VITE_SITE_DES": "化学教学资源平台"
+      },
+      "routes": [
+        { "src": "/assets/(.*)", "headers": { "cache-control": "public,max-age=31536000,immutable" } },
+        { "src": "/(.*)\\.(?:js|css|png|jpg|jpeg|gif|ico)$", "headers": { "cache-control": "public,max-age=31536000,immutable" } },
+        { "src": "/service-worker.js", "headers": { "cache-control": "public,max-age=0,must-revalidate" } },
+        { "src": "/(.*)", "dest": "/index.html" }
+      ]
+    }
+  }
+} 

@@ -1,0 +1,86 @@
+// 主题颜色变量
+:root {
+  --primary-bg: #87CEEB;        // 天空蓝
+  --secondary-bg: #90EE90;      // 草地绿
+  --accent-color: #4A708B;      // 远山蓝
+  --text-color: #333333;        // 深色文字
+  --text-light: #FFFFFF;        // 浅色文字
+  --card-bg: rgba(255, 255, 255, 0.9);  // 卡片背景
+  --hover-color: #6CA6CD;       // 悬停效果
+  --shadow-color: rgba(74, 112, 139, 0.2); // 阴影颜色
+}
+
+// 应用主题
+body {
+  background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+  color: var(--text-color);
+}
+
+.cards {
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 6px var(--shadow-color);
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 12px var(--shadow-color);
+  }
+}
+
+a {
+  color: var(--accent-color);
+  
+  &:hover {
+    color: var(--hover-color);
+  }
+}
+
+// 导航栏样式
+.nav-menu {
+  background-color: var(--accent-color);
+  color: var(--text-light);
+}
+
+// 按钮样式
+.btn-primary {
+  background-color: var(--accent-color);
+  color: var(--text-light);
+  
+  &:hover {
+    background-color: var(--hover-color);
+  }
+}
+
+// 卡片标题
+.card-title {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--secondary-bg);
+}
+
+// 社交媒体图标
+.social-icons {
+  a {
+    color: var(--accent-color);
+    
+    &:hover {
+      color: var(--hover-color);
+      transform: scale(1.1);
+    }
+  }
+}
+
+// 课件预览卡片
+.course-preview {
+  background-color: var(--card-bg);
+  border: 1px solid var(--secondary-bg);
+  
+  &:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+  }
+}
+
+// 页脚样式
+.footer {
+  background-color: var(--accent-color);
+  color: var(--text-light);
+} 

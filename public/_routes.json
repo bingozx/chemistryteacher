@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": [
+    "/assets/*",
+    "/images/*",
+    "/*.ico",
+    "/*.png",
+    "/*.svg",
+    "/*.txt",
+    "/service-worker.js",
+    "/manifest.webmanifest"
+  ]
+} 

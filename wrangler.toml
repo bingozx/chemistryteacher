@@ -1,0 +1,24 @@
+name = "chemistryteacher"
+main = "src/worker.js"
+compatibility_date = "2024-04-16"
+
+[site]
+bucket = "./dist"
+entry-point = "workers-site"
+
+[env.production]
+workers_dev = false
+route = "chemteacher.ip-ddns.com/*"
+vars = { VITE_SITE_NAME = "化学教学", VITE_SITE_DES = "化学教学资源平台" }
+
+[env.preview]
+vars = { VITE_SITE_NAME = "化学教学(预览)", VITE_SITE_DES = "化学教学资源平台" }
+
+[build]
+command = "pnpm install && pnpm run build"
+watch_dir = "src"
+output_dir = "dist"
+
+[build.environment]
+NODE_VERSION = "18"
+PNPM_VERSION = "8.7.1" 
