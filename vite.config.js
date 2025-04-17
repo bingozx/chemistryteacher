@@ -12,11 +12,15 @@ import viteCompression from "vite-plugin-compression";
 const cspConfig = {
   'default-src': ["'self'"],
   'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-  'style-src': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com"],
-  'img-src': ["'self'", "data:", "https:"],
-  'font-src': ["'self'", "https://s1.hdslb.com"],
-  'connect-src': ["'self'", "https:"],
-  'style-src-elem': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com"]
+  'style-src': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com", "https://fonts.googleapis.com", "data:"],
+  'img-src': ["'self'", "data:", "https:", "blob:"],
+  'font-src': ["'self'", "https://s1.hdslb.com", "data:", "https://fonts.gstatic.com"],
+  'connect-src': ["'self'", "https:", "wss:"],
+  'style-src-elem': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com", "https://fonts.googleapis.com", "data:"],
+  'worker-src': ["'self'", "blob:"],
+  'frame-src': ["'self'"],
+  'media-src': ["'self'", "https:", "data:"],
+  'object-src': ["'none'"]
 };
 
 // 生成CSP字符串
@@ -105,7 +109,10 @@ export default ({ mode }) =>
         transformIndexHtml(html) {
           return html.replace(
             /<head>/,
-            `<head><meta http-equiv="Content-Security-Policy" content="${generateCSP(cspConfig)}">`
+            `<head>
+            <meta http-equiv="Content-Security-Policy" content="${generateCSP(cspConfig)}">
+            <meta name="viewport" content="width=device-width,initial-scale=1.0">
+            <meta charset="UTF-8">`
           );
         },
       }

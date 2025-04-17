@@ -1,6 +1,23 @@
-import { createApp } from "vue";
+// Element Plus
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
+// 样式
 import "@/style/style.scss";
+
+// Vue
+import { createApp } from "vue";
 import App from "@/App.vue";
+
+// Pinia
+import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+
+// Router
+import router from '@/router'
+
+// Swiper
+import "swiper/css";
 
 // 创建应用实例
 const app = createApp(App);
@@ -11,24 +28,16 @@ app.config.errorHandler = (err, vm, info) => {
   console.error('Error Info:', info);
 };
 
-// Element Plus
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
+// 初始化 Element Plus
 app.use(ElementPlus);
 
-// Pinia
-import { createPinia } from "pinia";
-import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+// 初始化 Pinia
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 
-// Router
-import router from '@/router'
+// 初始化路由
 app.use(router);
-
-// Swiper
-import "swiper/css";
 
 // 挂载应用
 app.mount("#app");
@@ -41,7 +50,7 @@ if ('serviceWorker' in navigator) {
       console.log('SW registered:', registration);
 
       registration.addEventListener("controllerchange", () => {
-        ElementPlus.ElMessage({
+        app.config.globalProperties.$message({
           message: "站点已更新，刷新后生效",
           type: "success",
           duration: 3000
