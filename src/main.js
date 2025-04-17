@@ -8,6 +8,9 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import router from '@/router'
 // swiper
 import "swiper/css";
+// Element Plus
+import { ElMessage } from 'element-plus'
+import 'element-plus/dist/index.css'
 
 const app = createApp(App);
 const pinia = createPinia();
@@ -18,8 +21,18 @@ app.use(router);
 app.mount("#app");
 
 // PWA
-navigator.serviceWorker.addEventListener("controllerchange", () => {
-  // 弹出更新提醒
-  console.log("站点已更新，刷新后生效");
-  ElMessage("站点已更新，刷新后生效");
-});
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js').then((registration) => {
+    console.log('SW registered:', registration);
+  }).catch((error) => {
+    console.log('SW registration failed:', error);
+  });
+
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    ElMessage({
+      message: "站点已更新，刷新后生效",
+      type: "success",
+      duration: 3000
+    });
+  });
+}
