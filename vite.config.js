@@ -87,6 +87,16 @@ export default ({ mode }) =>
     server: {
       port: "3000",
       open: true,
+      headers: {
+        'Content-Security-Policy': `
+          default-src 'self';
+          script-src 'self' 'unsafe-inline' 'unsafe-eval';
+          style-src 'self' 'unsafe-inline' https://s1.hdslb.com;
+          img-src 'self' data: https:;
+          font-src 'self' https://s1.hdslb.com;
+          connect-src 'self' https:;
+        `
+      }
     },
     resolve: {
       alias: [
