@@ -12,11 +12,10 @@ import viteCompression from "vite-plugin-compression";
 const cspConfig = {
   'default-src': ["'self'"],
   'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-  'style-src': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com", "https://fonts.googleapis.com", "data:"],
+  'style-src': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com", "https://fonts.googleapis.com", "data:", "https:", "blob:"],
   'img-src': ["'self'", "data:", "https:", "blob:"],
-  'font-src': ["'self'", "https://s1.hdslb.com", "data:", "https://fonts.gstatic.com"],
+  'font-src': ["'self'", "https://s1.hdslb.com", "data:", "https://fonts.gstatic.com", "https:", "blob:"],
   'connect-src': ["'self'", "https:", "wss:"],
-  'style-src-elem': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com", "https://fonts.googleapis.com", "data:"],
   'worker-src': ["'self'", "blob:"],
   'frame-src': ["'self'"],
   'media-src': ["'self'", "https:", "data:"],
@@ -110,9 +109,9 @@ export default ({ mode }) =>
           return html.replace(
             /<head>/,
             `<head>
-            <meta http-equiv="Content-Security-Policy" content="${generateCSP(cspConfig)}">
+            <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width,initial-scale=1.0">
-            <meta charset="UTF-8">`
+            <meta http-equiv="Content-Security-Policy" content="${generateCSP(cspConfig)}">`
           );
         },
       }
