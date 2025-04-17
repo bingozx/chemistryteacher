@@ -25,11 +25,33 @@ export default ({ mode }) =>
         devOptions: {
           enabled: true,
           type: 'module',
-          navigateFallback: 'index.html'
+        },
+        manifest: {
+          name: "ChemTeacher白的化学课件",
+          short_name: "化学课件",
+          description: "人教版初中化学精品课件",
+          theme_color: "#ffffff",
+          start_url: "/",
+          display: "standalone",
+          background_color: "#ffffff",
+          icons: [
+            {
+              src: "/images/icon/192.png",
+              sizes: "192x192",
+              type: "image/png"
+            },
+            {
+              src: "/images/icon/512.png",
+              sizes: "512x512",
+              type: "image/png"
+            }
+          ]
         },
         workbox: {
           skipWaiting: true,
           clientsClaim: true,
+          navigateFallback: 'index.html',
+          navigateFallbackAllowlist: [/^\/$/],
           runtimeCaching: [
             {
               urlPattern: /(.*?)\.(js|css|woff2|woff|ttf)/, // js / css 静态资源缓存
@@ -57,80 +79,6 @@ export default ({ mode }) =>
               }
             }
           ],
-          // 离线页面
-          offlineGoogleAnalytics: true
-        },
-        manifest: {
-          name: loadEnv(mode, process.cwd()).VITE_SITE_NAME,
-          short_name: loadEnv(mode, process.cwd()).VITE_SITE_NAME,
-          description: loadEnv(mode, process.cwd()).VITE_SITE_DES,
-          display: "standalone",
-          start_url: "/",
-          theme_color: "#424242",
-          background_color: "#424242",
-          orientation: "portrait",
-          categories: ["education", "productivity"],
-          icons: [
-            {
-              src: "/images/icon/48.png",
-              sizes: "48x48",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/72.png",
-              sizes: "72x72",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/96.png",
-              sizes: "96x96",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/128.png",
-              sizes: "128x128",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/144.png",
-              sizes: "144x144",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/192.png",
-              sizes: "192x192",
-              type: "image/png",
-            },
-            {
-              src: "/images/icon/512.png",
-              sizes: "512x512",
-              type: "image/png",
-              purpose: "any maskable"
-            },
-          ],
-          screenshots: [
-            {
-              src: "/screenshots/home.png",
-              sizes: "1280x720",
-              type: "image/png",
-              label: "首页截图"
-            }
-          ],
-          shortcuts: [
-            {
-              name: "课件展示",
-              url: "/courseware",
-              icons: [
-                {
-                  src: "/images/icon/96.png",
-                  sizes: "96x96",
-                  type: "image/png"
-                }
-              ]
-            }
-          ],
-          related_applications: [],
-          prefer_related_applications: false
         },
       }),
       viteCompression(),
