@@ -8,6 +8,24 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import viteCompression from "vite-plugin-compression";
 
+// CSP配置
+const cspConfig = {
+  'default-src': ["'self'"],
+  'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+  'style-src': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com"],
+  'img-src': ["'self'", "data:", "https:"],
+  'font-src': ["'self'", "https://s1.hdslb.com"],
+  'connect-src': ["'self'", "https:"],
+  'style-src-elem': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com"]
+};
+
+// 生成CSP字符串
+const generateCSP = (config) => {
+  return Object.entries(config)
+    .map(([key, value]) => `${key} ${value.join(' ')}`)
+    .join('; ');
+};
+
 // https://vitejs.dev/config/
 export default ({ mode }) =>
   defineConfig({
@@ -82,20 +100,22 @@ export default ({ mode }) =>
         },
       }),
       viteCompression(),
+      {
+        name: 'html-transform',
+        transformIndexHtml(html) {
+          return html.replace(
+            /<head>/,
+            `<head><meta http-equiv="Content-Security-Policy" content="${generateCSP(cspConfig)}">`
+          );
+        },
+      }
     ],
     base: '/',
     server: {
       port: "3000",
       open: true,
       headers: {
-        'Content-Security-Policy': `
-          default-src 'self';
-          script-src 'self' 'unsafe-inline' 'unsafe-eval';
-          style-src 'self' 'unsafe-inline' https://s1.hdslb.com;
-          img-src 'self' data: https:;
-          font-src 'self' https://s1.hdslb.com;
-          connect-src 'self' https:;
-        `
+        'Content-Security-Policy': generateCSP(cspConfig)
       }
     },
     resolve: {
