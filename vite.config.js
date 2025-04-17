@@ -10,14 +10,14 @@ import viteCompression from "vite-plugin-compression";
 
 // CSP配置
 const cspConfig = {
-  'default-src': ["'self'"],
-  'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-  'style-src': ["'self'", "'unsafe-inline'", "https://s1.hdslb.com", "https://fonts.googleapis.com", "data:", "https:", "blob:"],
+  'default-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:", "data:", "blob:", "wss:"],
+  'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:", "blob:"],
+  'style-src': ["'self'", "'unsafe-inline'", "https:", "data:", "blob:"],
   'img-src': ["'self'", "data:", "https:", "blob:"],
-  'font-src': ["'self'", "https://s1.hdslb.com", "data:", "https://fonts.gstatic.com", "https:", "blob:"],
+  'font-src': ["'self'", "data:", "https:", "blob:"],
   'connect-src': ["'self'", "https:", "wss:"],
   'worker-src': ["'self'", "blob:"],
-  'frame-src': ["'self'"],
+  'frame-src': ["'self'", "https:"],
   'media-src': ["'self'", "https:", "data:"],
   'object-src': ["'none'"]
 };
@@ -111,7 +111,8 @@ export default ({ mode }) =>
             `<head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width,initial-scale=1.0">
-            <meta http-equiv="Content-Security-Policy" content="${generateCSP(cspConfig)}">`
+            <meta http-equiv="Content-Security-Policy" content="${generateCSP(cspConfig)}">
+            <link rel="preload" href="https://s1.hdslb.com/bfs/static/jinkela/long/font/regular.css" as="style">`
           );
         },
       }

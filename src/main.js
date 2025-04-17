@@ -1,14 +1,15 @@
-// Vue
-import { createApp } from "vue";
-import App from "@/App.vue";
+// 样式
+import "@/style/style.scss";
+import "swiper/css";
 
 // Element Plus
 import ElementPlus from 'element-plus'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import 'element-plus/dist/index.css'
 
-// 样式
-import "@/style/style.scss";
+// Vue
+import { createApp } from "vue";
+import App from "@/App.vue";
 
 // Pinia
 import { createPinia } from "pinia";
@@ -17,8 +18,9 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 // Router
 import router from '@/router'
 
-// Swiper
-import "swiper/css";
+// 创建Pinia实例
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
 // 创建应用实例
 const app = createApp(App);
@@ -31,14 +33,13 @@ app.config.errorHandler = (err, vm, info) => {
 
 // 初始化 Element Plus
 app.use(ElementPlus);
+
 // 注册所有图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
 
 // 初始化 Pinia
-const pinia = createPinia();
-pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 
 // 初始化路由
